@@ -134,12 +134,12 @@ Promise.all([
   capa1 = L.geoJSON(d1, {
     style: styleFunc,
     onEachFeature: popupFunc
-  }).addTo(map);
+  });
 
   capa2 = L.geoJSON(d2, {
     style: styleFunc,
     onEachFeature: popupFunc
-  }).addTo(map);
+  });
 
 var overlayMaps = {
   "Incendios Hoy": capa0,
