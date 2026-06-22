@@ -41,7 +41,8 @@ if getattr(sys, 'frozen', False):
 else:
     # Si está en .py normal
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-'''for Numero in [0,1,2]:
+'''
+for Numero in [0,1,2]:
     Numero=str(Numero)
     file_meteo = RAW_DIR / f"vw_riesgometeoalertad{Numero}.geojson"
     file_municipio = RAW_DIR / f"vw_riesgomunicipiod{Numero}.geojson"
