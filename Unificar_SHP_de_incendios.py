@@ -46,6 +46,7 @@ for i in [0,1,2]:
     i=str(i)
     file_meteo = RAW_DIR / f"vw_riesgometeoalertad{i}.geojson"
     file_municipio = RAW_DIR / f"vw_riesgomunicipiod{i}.geojson"
+        
     # basandome en https://www.lexnavarra.navarra.es/detalle.asp?r=37630  Capitulo 2 Articulo 6
     #Descarga de capas
     url_municipio = (
