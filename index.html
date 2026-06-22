@@ -141,15 +141,15 @@ Promise.all([
     onEachFeature: popupFunc
   });
 
-  var overlayMaps = {
-    "Incendios Hoy": capa0,
-    "Incendios Mañana": capa1,
-    "Incendios Pasado mañana": capa2
-  };
+var overlayMaps = {
+  "Incendios Hoy": capa0,
+  "Incendios Mañana": capa1,
+  "Incendios Pasado mañana": capa2
+};
 
-  L.control.layers(null, overlayMaps, {
-    collapsed: false
-  }).addTo(map);
+L.control.layers(null, overlayMaps, {
+  collapsed: false
+}).addTo(map);
 
 });
 
