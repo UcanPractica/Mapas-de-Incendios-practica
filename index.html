@@ -94,7 +94,7 @@ const colores = {
 };
 
 // cargar geojson 
-fetch('https://raw.githubusercontent.com/PreciadosUcan/Mapas-de-Prevencion-de-incendios/main/data/processed/incendios_wgs84.geojson')
+fetch('https://raw.githubusercontent.com/PreciadosUcan/Mapas-de-Prevencion-de-incendios/main/data/processed/incendios_wgs84'+i+'.geojson')
   .then(r => r.json())
   .then(data => {
     let ultima = data.features[0].properties.Fecha;
