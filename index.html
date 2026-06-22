@@ -143,7 +143,12 @@ Promise.all([
     style: styleFunc,
     onEachFeature: popupFunc
   }).addTo(map);
+  
+const firstFeatureDate = d0.features[0].properties.Fecha;
 
+document.getElementById("lastUpdate").innerHTML =
+  "Última actualización: " + firstFeatureDate;
+  
 var overlayMaps = {
   "Incendios Hoy": capa0,
   "Incendios Mañana": capa1,
