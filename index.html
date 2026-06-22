@@ -17,6 +17,9 @@
   font-size: 14px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
+.leaflet-bottom.leaflet-left {
+  z-index: 9999;
+}
 .top-center {
   position: absolute;
   top: 15px;
@@ -148,7 +151,7 @@ var overlayMaps = {
 };
 
 L.control.layers(null, overlayMaps, {
-  collapsed: False,
+  collapsed: false,
   position: 'bottomleft'   // 👈 AQUÍ
 }).addTo(map);
 
