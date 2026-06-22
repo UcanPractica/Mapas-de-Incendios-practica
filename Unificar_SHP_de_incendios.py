@@ -53,7 +53,7 @@ for i in [0,1,2]:
         "?service=WFS"
         "&version=2.0.0"
         "&request=GetFeature"
-        "&typeNames=riesgoIncendios:vw_riesgomunicipiod"+i
+        "&typeNames=riesgoIncendios:vw_riesgomunicipiod"+ i +
         "&outputFormat=application/json"
     )
     print("Descargando municipio...")
@@ -81,7 +81,7 @@ for i in [0,1,2]:
         "?service=WFS"
         "&version=2.0.0"
         "&request=GetFeature"
-        "&typeNames=riesgoIncendios:vw_riesgometeoalertad"+i
+        "&typeNames=riesgoIncendios:vw_riesgometeoalertad"+ i +
         "&outputFormat=application/json"
     )
     
