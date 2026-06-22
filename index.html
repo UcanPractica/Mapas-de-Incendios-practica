@@ -157,13 +157,13 @@ Promise.all([
     pane: 'capa1Pane',
     style: styleFunc,
     onEachFeature: popupFunc
-  }).addTo(map);
+  });
   
   capa2 = L.geoJSON(d2, {
     pane: 'capa2Pane',
     style: styleFunc,
     onEachFeature: popupFunc
-  }).addTo(map);
+  });
   
 const firstFeatureDate = d0.features[0].properties.Fecha;
 
@@ -181,11 +181,8 @@ L.control.layers(null, overlayMaps, {
   position: 'topleft'   // 👈 AQUÍ
 }).addTo(map);
 
-map.on('overlayadd', function (e) {
-  Object.values(overlays).forEach(layer => {
-    if (map.hasLayer(layer) && layer !== e.layer) {
-      map.removeLayer(layer);
-    }
+
+  
   });
 });
 });
