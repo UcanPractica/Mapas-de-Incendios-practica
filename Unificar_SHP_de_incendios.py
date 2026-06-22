@@ -108,11 +108,11 @@ for i in [0,1,2]:
     gdf2 = gpd.read_file(file_municipio)
     
     #Este es el de Sina viso que aparece de [Sin aviso, Verde, Amarillo, Naranja, Rojo]
-    Riesgo_de_incendio = gpd.read_file(RAW_DIR / "vw_riesgometeoalertad"+i+".geojson")
+    Riesgo_de_incendio = gpd.read_file((RAW_DIR / "vw_riesgometeoalertad") + i + ".geojson")
     
     #Este es el de Sina viso que aparece de [Bajo, Moderado, Alto, Muy Alto, Extremo]
-    Aviso_Temp_Extrema = gpd.read_file(RAW_DIR / "vw_riesgomunicipiod"+i+".geojson")
-    
+    Aviso_Temp_Extrema = gpd.read_file((RAW_DIR / "vw_riesgomunicipiod") + i + ".geojson")
+
     now = datetime.now()
     current_time = now.strftime("%H_%M_%S")
     
