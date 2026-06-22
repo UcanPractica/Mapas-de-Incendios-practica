@@ -181,6 +181,13 @@ L.control.layers(null, overlayMaps, {
   position: 'topleft'   // 👈 AQUÍ
 }).addTo(map);
 
+map.on('overlayadd', function (e) {
+  Object.values(overlays).forEach(layer => {
+    if (map.hasLayer(layer) && layer !== e.layer) {
+      map.removeLayer(layer);
+    }
+  });
+});
 });
 
 </script>
