@@ -121,9 +121,9 @@ function popupFunc(feature, layer) {
   );
 }
 Promise.all([
-  fetch('https://raw.githubusercontent.com/PreciadosUcan/Mapas-de-Prevencion-de-incendios/main/data/processed/incendios_wgs84.geojson').then(r => r.json()),
-  fetch('https://raw.githubusercontent.com/UcanPractica/Mapas-de-Prevencion-de-incendios/main/data/processed/incendios_wgs841.geojson').then(r => r.json()),
-  fetch('https://raw.githubusercontent.com/UcanPractica/Mapas-de-Prevencion-de-incendios/main/data/processed/incendios_wgs842.geojson').then(r => r.json())
+  fetch('https://raw.githubusercontent.com/UcanPractica/Mapas-de-Incendios-practica/main/data/processed/incendios_wgs840.geojson').then(r => r.json()),
+  fetch('https://raw.githubusercontent.com/UcanPractica/Mapas-de-Incendios-practica/main/data/processed/incendios_wgs841.geojson').then(r => r.json()),
+  fetch('https://raw.githubusercontent.com/UcanPractica/Mapas-de-Incendios-practica/main/data/processed/incendios_wgs842.geojson').then(r => r.json())
 ]).then(([d0, d1, d2]) => {
 
   capa0 = L.geoJSON(d0, {
