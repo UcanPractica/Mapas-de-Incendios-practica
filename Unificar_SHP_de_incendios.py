@@ -169,4 +169,4 @@ for i in [0,1,2]:
     gdf_merge = gdf_merge.set_crs(25830)
     # Convertir a WGS84 (Leaflet)
     gdf_merge = gdf_merge.to_crs(4326)
-    gdf_merge.to_file(OUT_DIR  / "incendios_wgs84"+i+".geojson", driver="GeoJSON")
+    gdf_merge.to_file(OUT_DIR / f"incendios_wgs84{i}.geojson",driver="GeoJSON")
