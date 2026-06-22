@@ -148,7 +148,8 @@ var overlayMaps = {
 };
 
 L.control.layers(null, overlayMaps, {
-  collapsed: false
+  collapsed: False,
+  position: 'bottomleft'   // 👈 AQUÍ
 }).addTo(map);
 
 });
