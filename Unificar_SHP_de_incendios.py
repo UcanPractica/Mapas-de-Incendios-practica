@@ -41,11 +41,10 @@ if getattr(sys, 'frozen', False):
 else:
     # Si está en .py normal
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-'''
-for i in [0,1,2]:
-    i=str(i)
-    file_meteo = RAW_DIR / f"vw_riesgometeoalertad{i}.geojson"
-    file_municipio = RAW_DIR / f"vw_riesgomunicipiod{i}.geojson"
+'''for Numero in [0,1,2]:
+    Numero=str(Numero)
+    file_meteo = RAW_DIR / f"vw_riesgometeoalertad{Numero}.geojson"
+    file_municipio = RAW_DIR / f"vw_riesgomunicipiod{Numero}.geojson"
         
     # basandome en https://www.lexnavarra.navarra.es/detalle.asp?r=37630  Capitulo 2 Articulo 6
     #Descarga de capas
@@ -54,7 +53,7 @@ for i in [0,1,2]:
         "?service=WFS"
         "&version=2.0.0"
         "&request=GetFeature"
-        "&typeNames=riesgoIncendios:vw_riesgomunicipiod"+ i +
+        "&typeNames=riesgoIncendios:vw_riesgomunicipiod"+ Numero +
         "&outputFormat=application/json"
     )
     print("Descargando municipio...")
@@ -82,7 +81,7 @@ for i in [0,1,2]:
         "?service=WFS"
         "&version=2.0.0"
         "&request=GetFeature"
-        "&typeNames=riesgoIncendios:vw_riesgometeoalertad"+ i +
+        "&typeNames=riesgoIncendios:vw_riesgometeoalertad"+ Numero +
         "&outputFormat=application/json"
     )
     
@@ -109,9 +108,10 @@ for i in [0,1,2]:
     gdf2 = gpd.read_file(file_municipio)
     
     #Este es el de Sina viso que aparece de [Sin aviso, Verde, Amarillo, Naranja, Rojo]
-    Riesgo_de_incendio = gpd.read_file(RAW_DIR / f"vw_riesgometeoalertad{i}.geojson")
+    Riesgo_de_incendio = gpd.read_file(RAW_DIR / f"vw_riesgometeoalertad{Numero}.geojson")
+    
     #Este es el de Sina viso que aparece de [Bajo, Moderado, Alto, Muy Alto, Extremo]
-    Aviso_Temp_Extrema = gpd.read_file(RAW_DIR / f"vw_riesgomunicipiod{i}.geojson")
+    Aviso_Temp_Extrema = gpd.read_file(RAW_DIR / f"vw_riesgomunicipiod{Numero}.geojson")
 
     now = datetime.now()
     current_time = now.strftime("%H_%M_%S")
@@ -170,4 +170,8 @@ for i in [0,1,2]:
     gdf_merge = gdf_merge.set_crs(25830)
     # Convertir a WGS84 (Leaflet)
     gdf_merge = gdf_merge.to_crs(4326)
-    gdf_merge.to_file(OUT_DIR / f"incendios_wgs84{i}.geojson",driver="GeoJSON")
+    print(f"incendios_wgs84{Numero}.geojson")
+    gdf_merge.to_file(OUT_DIR / f"incendios_wgs84{Numero}.geojson",driver="GeoJSON")
+
+
+
