@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Incendios</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <style>
+.legend {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: white;
+  padding: 10px 12px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.top-center {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+
+  background: white;
+  padding: 8px 14px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.footer-text {
+  text-align: justify;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  background: white;
+  padding: 6px 12px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.legend h4 {
+  margin: 0 0 8px 0;
+}
+
+.box {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  border: 1px solid #000;
+  vertical-align: middle;
+}
+</style>
+</head>
+ 
+<body>
+<div id="map" style="height: 100vh;"></div>
+<div id="lastUpdate" class="top-center">
+  Última actualización: cargando...
+</div>
+<div class="footer-text">
+  Mapa elaborado por UCAN con datos procedentes del Gobierno de Navarra en prevención de incendios forestales en Navarra. La información mostrada es orientativa; para consultar las restricciones y avisos oficiales vigentes, se recomienda acudir siempre a la  <a href="https://www.navarra.es/es/prevencion-de-incendios-forestales" target="_blank">URL</a> oficial del Gobierno de Navarra.
+</div>
+<!-- 👇 AQUÍ VA LA LEYENDA -->
+<div class="legend">
+  <h4>Labores agrícolas</h4>
+  <div><span class="box" style="background: green;"></span> Permitidas</div>
+  <div><span class="box" style="background: yellow;"></span> Permitidas condicional</div>
+  <div><span class="box" style="background: orange;"></span> Permitidas condicional estricta</div>
+  <div><span class="box" style="background: red;"></span> Prohibidas</div>
+</div>
+<script>
+
+var map = L.map('map').setView([42.82, -1.64], 8);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'OSM'
+}).addTo(map);
+
+// colores
+const colores = {
+  'Permitidas': 'green',
+  'Permitidas condicional': 'yellow',
+  'Permitidas condicional estricta': 'orange',
+  'Prohibidas completamente': 'red'
+};
+
+// cargar geojson 
+fetch('https://raw.githubusercontent.com/PreciadosUcan/Mapas-de-Prevencion-de-incendios/main/data/processed/incendios_wgs84.geojson')
+  .then(r => r.json())
+  .then(data => {
+    let ultima = data.features[0].properties.Fecha;
+    document.getElementById("lastUpdate").innerHTML =
+      "Última actualización: " + ultima;
+    L.geoJSON(data, {
+      style: function(feature) {
+        return {
+          color: 'black',
+          weight: 0.5,
+          fillColor: colores[feature.properties.Labores] || 'gray',
+          fillOpacity: 0.7
+        };
+      },
+
+      onEachFeature: function(feature, layer) {
+        layer.bindPopup(
+            `<div style="font-size:45px;">
+                <div style="font-size:28px; font-weight:bold;">
+                  ${feature.properties.Municipio}
+                </div>
+          
+                <div style="margin-top:10px;">
+                  <b>Labores:</b> ${feature.properties.Labores}
+                </div>
+          
+                <div style="margin-top:10px;">
+                  <b>Condiciones:</b>
+                  <a href="https://drive.google.com/file/d/1CsVGZbDjP6alNQBMbCDsJEDcUPZmgVRq/view?usp=sharing" target="_blank">
+                    ver condiciones
+                  </a>
+                </div>
+          
+                <div style="margin-top:10px;">
+                  <b>Última actualización:</b> ${feature.properties.Fecha}
+                </div>
+             </div>`,
+         {
+            maxWidth: 550
+         }
+        );
+      }
+
+    }).addTo(map);
+
+  });
+
+</script>
+
+</body>
+</html>
