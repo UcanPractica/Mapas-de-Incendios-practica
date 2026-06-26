@@ -180,7 +180,18 @@ L.control.layers(null, overlayMaps, {
   collapsed: false,
   position: 'topleft'   // 👈 AQUÍ
 }).addTo(map);
+  
+map.on('overlayadd', function(e) {
 
+    // Ejecutar la función que quieras
+    console.log("Se ha activado:", e.name);
+
+    // Desactivar el resto de capas
+    Object.values(overlayMaps).forEach(function(capa) {
+        if (capa !== e.layer && map.hasLayer(capa)) {
+            map.removeLayer(capa);
+        }
+    });
 });
 
 </script>
