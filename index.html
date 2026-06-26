@@ -182,9 +182,9 @@ var baseMaps = {
   "Restricciones provisionales Pasado mañana": capa2
 };
   
-L.control.layers(null, baseMaps, {
+L.control.layers(baseMaps, null, {
   collapsed: false,
-  position: 'topleft'   // 👈 AQUÍ
+  position: 'topleft'
 }).addTo(map);
 
 });
