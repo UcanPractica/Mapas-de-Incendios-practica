@@ -175,8 +175,14 @@ var overlayMaps = {
   "Restricciones provisionales Mañana": capa1,
   "Restricciones provisionales Pasado mañana": capa2
 };
-
-L.control.layers(null, overlayMaps, {
+  
+var baseMaps = {
+  "Restricciones Hoy": capa0,
+  "Restricciones provisionales Mañana": capa1,
+  "Restricciones provisionales Pasado mañana": capa2
+};
+  
+L.control.layers(null, baseMaps, {
   collapsed: false,
   position: 'topleft'   // 👈 AQUÍ
 }).addTo(map);
@@ -192,8 +198,8 @@ map.on('overlayadd', function(e) {
             map.removeLayer(capa);
         }
     });
-});
 
+});
 </script>
 
 </body>
